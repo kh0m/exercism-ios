@@ -21,6 +21,9 @@
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="m4w-08-H1a" kind="show" identifier="toExercise" id="NQa-nK-qcj"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -32,7 +35,33 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Pq-Se-8nH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="550" y="-887"/>
+            <point key="canvasLocation" x="94" y="-816"/>
+        </scene>
+        <!--Exercise View Controller-->
+        <scene sceneID="Pi3-1d-amW">
+            <objects>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="pageCurl" navigationOrientation="horizontal" spineLocation="min" id="m4w-08-H1a" customClass="ExerciseViewController" customModule="Exercism_iOS" customModuleProvider="target" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lPA-F4-CTv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="872" y="-816"/>
+        </scene>
+        <!--Iteration View Controller-->
+        <scene sceneID="fFp-dh-9Zv">
+            <objects>
+                <viewController id="6IX-tF-Uyv" customClass="IterationViewController" customModule="Exercism_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Y71-wn-PiC"/>
+                        <viewControllerLayoutGuide type="bottom" id="nxD-1l-96r"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="tnI-TD-FvG">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bOd-Ve-Zqg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="872" y="-1576"/>
         </scene>
         <!--Item 2-->
         <scene sceneID="Hij-C8-eMP">
@@ -51,7 +80,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="utu-EL-KCB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-262" y="-113"/>
+            <point key="canvasLocation" x="-718" y="-42"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="6Ta-2j-cbr">
@@ -88,7 +117,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mMX-b2-Ho8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-262" y="-887"/>
+            <point key="canvasLocation" x="-718" y="-816"/>
         </scene>
     </scenes>
 </document>

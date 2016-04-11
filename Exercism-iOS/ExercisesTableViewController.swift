@@ -56,6 +56,7 @@ class ExercisesTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         print("You selected cell #\(indexPath.row)!")
+        performSegueWithIdentifier("toExercise", sender: self)
     }
 
     /*
