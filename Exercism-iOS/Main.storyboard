@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Exercises-->
@@ -48,7 +49,7 @@
         <!--Iteration View Controller-->
         <scene sceneID="fFp-dh-9Zv">
             <objects>
-                <viewController id="6IX-tF-Uyv" customClass="IterationViewController" customModule="Exercism_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="IterationViewController" id="6IX-tF-Uyv" customClass="IterationViewController" customModule="Exercism_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Y71-wn-PiC"/>
                         <viewControllerLayoutGuide type="bottom" id="nxD-1l-96r"/>
@@ -56,7 +57,71 @@
                     <view key="view" contentMode="scaleToFill" id="tnI-TD-FvG">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="fvx-B8-oOE">
+                                <rect key="frame" x="40" y="41" width="352" height="203"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="352" id="o3t-Yk-y9q"/>
+                                </constraints>
+                                <string key="text">THIS IS FOR THE CODE Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="KzA-Ao-b1k">
+                                <rect key="frame" x="191" y="510" width="218" height="37"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="218" id="LSh-vn-oLw"/>
+                                </constraints>
+                            </pageControl>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="CFT-GP-n6u">
+                                <rect key="frame" x="86" y="400" width="411" height="69"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="69" id="3uu-Ga-crH"/>
+                                </constraints>
+                                <string key="text">THIS IS TO ADD COMMENTS Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rM9-io-AHw">
+                                <rect key="frame" x="20" y="264" width="560" height="128"/>
+                                <subviews>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ahk-yK-Xx5">
+                                        <rect key="frame" x="112" y="25" width="209" height="134"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="209" id="OHY-z3-EaZ"/>
+                                            <constraint firstAttribute="height" constant="134" id="qJI-Nq-hdI"/>
+                                        </constraints>
+                                        <string key="text">INDIVIDUAL COMMENT exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="ahk-yK-Xx5" firstAttribute="top" secondItem="rM9-io-AHw" secondAttribute="top" constant="25" id="A4j-5L-Yqu"/>
+                                    <constraint firstAttribute="trailing" secondItem="ahk-yK-Xx5" secondAttribute="trailing" constant="239" id="WHW-Uu-j1R"/>
+                                    <constraint firstItem="ahk-yK-Xx5" firstAttribute="leading" secondItem="rM9-io-AHw" secondAttribute="leading" constant="112" id="etB-F4-Dvd"/>
+                                    <constraint firstAttribute="bottom" secondItem="ahk-yK-Xx5" secondAttribute="bottom" constant="-31" id="rhI-LG-toM"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="rM9-io-AHw" firstAttribute="trailing" secondItem="tnI-TD-FvG" secondAttribute="trailingMargin" id="980-5l-zMH"/>
+                            <constraint firstItem="rM9-io-AHw" firstAttribute="top" secondItem="tnI-TD-FvG" secondAttribute="top" constant="264" id="IzE-7X-TMi"/>
+                            <constraint firstItem="CFT-GP-n6u" firstAttribute="leading" secondItem="tnI-TD-FvG" secondAttribute="leadingMargin" constant="66" id="Lr9-Po-BSA"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="CFT-GP-n6u" secondAttribute="trailing" constant="83" id="OlS-ez-sES"/>
+                            <constraint firstItem="CFT-GP-n6u" firstAttribute="top" secondItem="rM9-io-AHw" secondAttribute="bottom" constant="8" symbolic="YES" id="Quu-Kk-baG"/>
+                            <constraint firstItem="rM9-io-AHw" firstAttribute="leading" secondItem="tnI-TD-FvG" secondAttribute="leadingMargin" id="REF-UL-NXO"/>
+                            <constraint firstItem="KzA-Ao-b1k" firstAttribute="top" secondItem="CFT-GP-n6u" secondAttribute="bottom" constant="41" id="V0M-r1-jZo"/>
+                            <constraint firstAttribute="bottom" secondItem="rM9-io-AHw" secondAttribute="bottom" constant="208" id="VVs-cE-CQQ"/>
+                            <constraint firstItem="KzA-Ao-b1k" firstAttribute="centerX" secondItem="rM9-io-AHw" secondAttribute="centerX" id="XfP-xd-haw"/>
+                            <constraint firstItem="fvx-B8-oOE" firstAttribute="top" secondItem="Y71-wn-PiC" secondAttribute="bottom" constant="21" id="eei-Vx-CGm"/>
+                            <constraint firstItem="rM9-io-AHw" firstAttribute="top" secondItem="fvx-B8-oOE" secondAttribute="bottom" constant="20" id="f92-SC-p4L"/>
+                            <constraint firstItem="fvx-B8-oOE" firstAttribute="leading" secondItem="tnI-TD-FvG" secondAttribute="leadingMargin" constant="20" id="hb1-CH-iyz"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bOd-Ve-Zqg" userLabel="First Responder" sceneMemberID="firstResponder"/>

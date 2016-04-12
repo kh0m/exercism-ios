@@ -11,26 +11,71 @@ import UIKit
 class ExerciseViewController: UIPageViewController, UIPageViewControllerDataSource {
     
     lazy var exercise = Exercise()
-    lazy var iterationViewControllers = [IterationViewController]()
+    lazy var iterationViewControllers = [UIViewController]()
     
     // MARK: Conform to UIPageViewControllerDataSource
     func pageViewController(pageViewController: UIPageViewController,
                             viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
-        return nil
+        guard let viewControllerIndex = iterationViewControllers.indexOf(viewController) else {
+            return nil
+        }
+        
+        let previousIndex = viewControllerIndex - 1
+        
+        guard previousIndex >= 0 else {
+            return nil
+        }
+        
+        guard iterationViewControllers.count > previousIndex else {
+            return nil
+        }
+        
+        return iterationViewControllers[previousIndex]
     }
     
     func pageViewController(pageViewController: UIPageViewController,
                             viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
-        return nil
+
+        guard let viewControllerIndex = iterationViewControllers.indexOf(viewController) else {
+                return nil
+            }
+            
+            let nextIndex = viewControllerIndex + 1
+            let iterationViewControllersCount = iterationViewControllers.count
+            
+            guard iterationViewControllersCount != nextIndex else {
+                return nil
+            }
+            
+            guard iterationViewControllersCount > nextIndex else {
+                return nil
+            }
+            
+            return iterationViewControllers[nextIndex]
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        dataSource = self
+        
         self.navigationItem.title = exercise.name
         
         NetworkHandler.getSubmissionKey(exercise)
+        
+        for _ in (0..<3) {
+            let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("IterationViewController") as! IterationViewController
+            iterationViewControllers.append(vc)
+        }
+        
+        if let firstViewController = iterationViewControllers.first {
+            setViewControllers([firstViewController],
+                               direction: .Forward,
+                               animated: true,
+                               completion: nil)
+        }
         
 //        for iteration in iterations {
 //            let vc = IterationViewController()
