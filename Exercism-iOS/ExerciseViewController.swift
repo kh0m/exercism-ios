@@ -10,6 +10,7 @@ import UIKit
 
 class ExerciseViewController: UIPageViewController, UIPageViewControllerDataSource {
     
+    lazy var exercise = Exercise()
     lazy var iterationViewControllers = [IterationViewController]()
     
     // MARK: Conform to UIPageViewControllerDataSource
@@ -27,6 +28,7 @@ class ExerciseViewController: UIPageViewController, UIPageViewControllerDataSour
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        self.navigationItem.title = exercise.name
 //        for iteration in iterations {
 //            let vc = IterationViewController()
 //            iterationViewControllers.append(vc)

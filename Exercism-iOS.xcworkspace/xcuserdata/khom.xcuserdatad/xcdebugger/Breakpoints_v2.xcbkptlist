@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Exercism-iOS/NetworkHandler.swift"
-            timestampString = "481832272.666817"
+            timestampString = "482161826.090525"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "49"
-            endingLineNumber = "49"
+            startingLineNumber = "51"
+            endingLineNumber = "51"
             landmarkName = "getExercises(_:)"
             landmarkType = "5">
          </BreakpointContent>

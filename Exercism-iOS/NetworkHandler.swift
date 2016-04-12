@@ -93,7 +93,7 @@ class NetworkHandler: NSObject {
     }
     
     class func getIterations(oauthswift: OAuth2Swift, url: NSURL) {
-        
+        print(url)
     }
 }
 

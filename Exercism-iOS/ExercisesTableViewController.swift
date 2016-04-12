@@ -56,7 +56,6 @@ class ExercisesTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         print("You selected cell #\(indexPath.row)!")
-        performSegueWithIdentifier("toExercise", sender: self)
     }
 
     /*
@@ -94,14 +93,23 @@ class ExercisesTableViewController: UITableViewController {
     }
     */
 
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        if (segue.identifier == "toExercise") {
+            let vc = segue.destinationViewController as! ExerciseViewController
+            let path = self.tableView.indexPathForCell(sender as! UITableViewCell)!
+            let ex: Exercise = appDelegate.appData.languages[path.section].exercises[path.row]
+            vc.exercise = ex
+        }
     }
-    */
 
 }
+
+
+
+
+
