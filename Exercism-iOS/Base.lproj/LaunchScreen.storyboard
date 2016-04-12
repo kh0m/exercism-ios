@@ -16,7 +16,20 @@
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="e_red" translatesAutoresizingMaskIntoConstraints="NO" id="zaF-3J-5UU">
+                                <rect key="frame" x="203" y="198" width="195" height="204"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="195" id="l2y-06-Um8"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="zaF-3J-5UU" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="Out-I4-idS"/>
+                            <constraint firstItem="zaF-3J-5UU" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="178" id="dK6-9N-iat"/>
+                            <constraint firstItem="zaF-3J-5UU" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="hFZ-DY-xfY"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -24,4 +37,7 @@
             <point key="canvasLocation" x="53" y="375"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="e_red" width="200" height="200"/>
+    </resources>
 </document>
