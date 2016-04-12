@@ -25,75 +25,82 @@ class NetworkHandler: NSObject {
         }
     }
     
-    class func getExercises(oauthswift: OAuth2Swift) {
+    class func getExercises() {
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         
         if let exKey = Exercism["apiKey"] {
-            oauthswift.client.request("http://exercism.io/api/v1/exercises", method: .GET,
-                                      parameters: ["key" : exKey], headers: [:],
-                success: { data, response in
-                    let dataString = NSString(data: data, encoding: NSUTF8StringEncoding)
-                    print(dataString)
-                    do {
-                        let json = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions()) as? NSDictionary
-                        for (key, value) in json! {
-                            let lang = Language()
-                            lang.name = key as! String
-                            for v in (value as? NSArray)! {
-                                let ex = Exercise()
-                                ex.name = v["slug"] as! String
-                                ex.language = key as! String
-                                ex.isActive = (v["state"] as! String == "active" ? true : false)
-                                lang.exercises.append(ex)
-                            }
-                            appDelegate.appData.languages.append(lang)
+            let url = NSURL(string: "http://exercism.io/api/v1/exercises?key=\(exKey)")
+            
+            let task = NSURLSession.sharedSession().dataTaskWithURL(url!) {(data, response, error) in
+                let dataString = NSString(data: data!, encoding: NSUTF8StringEncoding)
+                print(dataString)
+                do {
+                    let json = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions()) as? NSDictionary
+                    for (key, value) in json! {
+                        let lang = Language()
+                        lang.name = key as! String
+                        for v in (value as? NSArray)! {
+                            let ex = Exercise()
+                            ex.name = v["slug"] as! String
+                            ex.language = key as! String
+                            ex.isActive = (v["state"] as! String == "active" ? true : false)
+                            lang.exercises.append(ex)
                         }
-                        print("app languages: \(appDelegate.appData.languages.count)")
-
-                    } catch {
-                        print(error)
+                        appDelegate.appData.languages.append(lang)
                     }
-                }, failure: { error in
+                    print("app languages: \(appDelegate.appData.languages.count)")
+                } catch {
                     print(error)
                 }
-            )
+            }
+            
+            task.resume()
         }
     }
     
-    class func getSubmissionKey(oauthswift: OAuth2Swift, exercise: Exercise) {
+    class func getSubmissionKey(exercise: Exercise) {
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         
         if let exKey = Exercism["apiKey"] {
-            oauthswift.client.request("http://exercism.io/api/v1/submissions/\(exercise.language)/\(exercise.name)", method: .GET,
-                                      parameters: ["key" : exKey], headers: [:],
-                success: { data, response in
-                    let dataString = NSString(data: data, encoding: NSUTF8StringEncoding)
-                    print(dataString)
-                    do {
-                        let json = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions()) as? NSDictionary
-                        
-                        print(json!["url"])
-                        let jsonurl = json!["url"] as! String
-                        let newurl = jsonurl.stringByReplacingOccurrencesOfString("exercism.io", withString: "exercism.io/api/v1")
-                        let nsurl = NSURL(string: newurl)!
-                        
-                        self.getIterations(oauthswift, url: nsurl)
-                        
-                        print("app languages: \(appDelegate.appData.languages.count)")
-                        
-                    } catch {
-                        print(error)
-                    }
-                }, failure: { error in
+            let url = NSURL(string: "http://exercism.io/api/v1/submissions/\(exercise.language)/\(exercise.name)?key=\(exKey)")
+            let task = NSURLSession.sharedSession().dataTaskWithURL(url!) {(data, response, error) in
+                let dataString = NSString(data: data!, encoding: NSUTF8StringEncoding)
+                print(dataString)
+                do {
+                    let json = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions()) as? NSDictionary
+                    
+                    print(json!["url"])
+                    let jsonurl = json!["url"] as! String
+                    let newurl = jsonurl.stringByReplacingOccurrencesOfString("exercism.io", withString: "exercism.io/api/v1")
+                    let nsurl = NSURL(string: newurl)!
+                    
+                    self.getIterations(nsurl)
+                    
+                    print("app languages: \(appDelegate.appData.languages.count)")
+                    
+                } catch {
                     print(error)
                 }
-            )
+            }
+            task.resume()
         }
 
     }
     
-    class func getIterations(oauthswift: OAuth2Swift, url: NSURL) {
+    private class func getIterations(url: NSURL) {
         print(url)
+        let task = NSURLSession.sharedSession().dataTaskWithURL(url) { (data, response, error) in
+            let dataString = NSString(data: data!, encoding: NSUTF8StringEncoding)
+            print(dataString)
+            do {
+                let json = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions()) as? NSDictionary
+                print(json!)
+            } catch {
+                print(error)
+            }
+        }
+        task.resume()
+
     }
 }
 

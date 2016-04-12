@@ -29,6 +29,9 @@ class ExerciseViewController: UIPageViewController, UIPageViewControllerDataSour
 
         // Do any additional setup after loading the view.
         self.navigationItem.title = exercise.name
+        
+        NetworkHandler.getSubmissionKey(exercise)
+        
 //        for iteration in iterations {
 //            let vc = IterationViewController()
 //            iterationViewControllers.append(vc)
