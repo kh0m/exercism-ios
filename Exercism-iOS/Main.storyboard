@@ -41,7 +41,9 @@
         <!--Exercise View Controller-->
         <scene sceneID="Pi3-1d-amW">
             <objects>
-                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="pageCurl" navigationOrientation="horizontal" spineLocation="min" id="m4w-08-H1a" customClass="ExerciseViewController" customModule="Exercism_iOS" customModuleProvider="target" sceneMemberID="viewController"/>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="m4w-08-H1a" customClass="ExerciseViewController" customModule="Exercism_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <extendedEdge key="edgesForExtendedLayout" top="YES"/>
+                </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lPA-F4-CTv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="872" y="-816"/>
@@ -62,23 +64,18 @@
                                 <rect key="frame" x="40" y="41" width="352" height="203"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="352" id="o3t-Yk-y9q"/>
+                                    <constraint firstAttribute="height" constant="203" id="3S1-jJ-E78"/>
+                                    <constraint firstAttribute="width" constant="352" id="4RZ-3l-Qch"/>
                                 </constraints>
                                 <string key="text">THIS IS FOR THE CODE Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="KzA-Ao-b1k">
-                                <rect key="frame" x="191" y="510" width="218" height="37"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="218" id="LSh-vn-oLw"/>
-                                </constraints>
-                            </pageControl>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="CFT-GP-n6u">
                                 <rect key="frame" x="86" y="400" width="411" height="69"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="69" id="3uu-Ga-crH"/>
+                                    <constraint firstAttribute="height" constant="69" id="hQY-k8-gwe"/>
                                 </constraints>
                                 <string key="text">THIS IS TO ADD COMMENTS Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -91,8 +88,8 @@
                                         <rect key="frame" x="112" y="25" width="209" height="134"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="209" id="OHY-z3-EaZ"/>
-                                            <constraint firstAttribute="height" constant="134" id="qJI-Nq-hdI"/>
+                                            <constraint firstAttribute="height" constant="134" id="7wn-0P-eBU"/>
+                                            <constraint firstAttribute="width" constant="209" id="o53-aF-ifp"/>
                                         </constraints>
                                         <string key="text">INDIVIDUAL COMMENT exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -100,27 +97,24 @@
                                     </textView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="ahk-yK-Xx5" firstAttribute="top" secondItem="rM9-io-AHw" secondAttribute="top" constant="25" id="A4j-5L-Yqu"/>
-                                    <constraint firstAttribute="trailing" secondItem="ahk-yK-Xx5" secondAttribute="trailing" constant="239" id="WHW-Uu-j1R"/>
-                                    <constraint firstItem="ahk-yK-Xx5" firstAttribute="leading" secondItem="rM9-io-AHw" secondAttribute="leading" constant="112" id="etB-F4-Dvd"/>
-                                    <constraint firstAttribute="bottom" secondItem="ahk-yK-Xx5" secondAttribute="bottom" constant="-31" id="rhI-LG-toM"/>
+                                    <constraint firstAttribute="bottom" secondItem="ahk-yK-Xx5" secondAttribute="bottom" constant="-31" id="R5w-Um-f0c"/>
+                                    <constraint firstItem="ahk-yK-Xx5" firstAttribute="top" secondItem="rM9-io-AHw" secondAttribute="top" constant="25" id="UEC-pX-x2D"/>
+                                    <constraint firstItem="ahk-yK-Xx5" firstAttribute="leading" secondItem="rM9-io-AHw" secondAttribute="leading" constant="112" id="YZk-ff-h6M"/>
+                                    <constraint firstAttribute="trailing" secondItem="ahk-yK-Xx5" secondAttribute="trailing" constant="239" id="t5K-oR-oR1"/>
                                 </constraints>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="rM9-io-AHw" firstAttribute="trailing" secondItem="tnI-TD-FvG" secondAttribute="trailingMargin" id="980-5l-zMH"/>
-                            <constraint firstItem="rM9-io-AHw" firstAttribute="top" secondItem="tnI-TD-FvG" secondAttribute="top" constant="264" id="IzE-7X-TMi"/>
-                            <constraint firstItem="CFT-GP-n6u" firstAttribute="leading" secondItem="tnI-TD-FvG" secondAttribute="leadingMargin" constant="66" id="Lr9-Po-BSA"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="CFT-GP-n6u" secondAttribute="trailing" constant="83" id="OlS-ez-sES"/>
-                            <constraint firstItem="CFT-GP-n6u" firstAttribute="top" secondItem="rM9-io-AHw" secondAttribute="bottom" constant="8" symbolic="YES" id="Quu-Kk-baG"/>
-                            <constraint firstItem="rM9-io-AHw" firstAttribute="leading" secondItem="tnI-TD-FvG" secondAttribute="leadingMargin" id="REF-UL-NXO"/>
-                            <constraint firstItem="KzA-Ao-b1k" firstAttribute="top" secondItem="CFT-GP-n6u" secondAttribute="bottom" constant="41" id="V0M-r1-jZo"/>
-                            <constraint firstAttribute="bottom" secondItem="rM9-io-AHw" secondAttribute="bottom" constant="208" id="VVs-cE-CQQ"/>
-                            <constraint firstItem="KzA-Ao-b1k" firstAttribute="centerX" secondItem="rM9-io-AHw" secondAttribute="centerX" id="XfP-xd-haw"/>
-                            <constraint firstItem="fvx-B8-oOE" firstAttribute="top" secondItem="Y71-wn-PiC" secondAttribute="bottom" constant="21" id="eei-Vx-CGm"/>
-                            <constraint firstItem="rM9-io-AHw" firstAttribute="top" secondItem="fvx-B8-oOE" secondAttribute="bottom" constant="20" id="f92-SC-p4L"/>
-                            <constraint firstItem="fvx-B8-oOE" firstAttribute="leading" secondItem="tnI-TD-FvG" secondAttribute="leadingMargin" constant="20" id="hb1-CH-iyz"/>
+                            <constraint firstItem="rM9-io-AHw" firstAttribute="leading" secondItem="tnI-TD-FvG" secondAttribute="leadingMargin" id="AB7-Er-yp4"/>
+                            <constraint firstItem="nxD-1l-96r" firstAttribute="top" secondItem="CFT-GP-n6u" secondAttribute="bottom" constant="131" id="AtT-Fw-DbE"/>
+                            <constraint firstItem="fvx-B8-oOE" firstAttribute="top" secondItem="Y71-wn-PiC" secondAttribute="bottom" constant="21" id="Cc3-YC-k5x"/>
+                            <constraint firstItem="fvx-B8-oOE" firstAttribute="leading" secondItem="tnI-TD-FvG" secondAttribute="leadingMargin" constant="20" id="Jo4-GB-faq"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="CFT-GP-n6u" secondAttribute="trailing" constant="83" id="MBE-Ml-k43"/>
+                            <constraint firstItem="rM9-io-AHw" firstAttribute="top" secondItem="fvx-B8-oOE" secondAttribute="bottom" constant="20" id="S0B-pH-fIy"/>
+                            <constraint firstItem="CFT-GP-n6u" firstAttribute="leading" secondItem="tnI-TD-FvG" secondAttribute="leadingMargin" constant="66" id="WD3-xk-cyh"/>
+                            <constraint firstItem="CFT-GP-n6u" firstAttribute="top" secondItem="rM9-io-AHw" secondAttribute="bottom" constant="8" symbolic="YES" id="dfh-4H-21z"/>
+                            <constraint firstItem="rM9-io-AHw" firstAttribute="trailing" secondItem="tnI-TD-FvG" secondAttribute="trailingMargin" id="q71-ag-QMH"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -128,10 +122,10 @@
             </objects>
             <point key="canvasLocation" x="872" y="-1576"/>
         </scene>
-        <!--Item 2-->
+        <!--User Submissions-->
         <scene sceneID="Hij-C8-eMP">
             <objects>
-                <viewController id="mje-j4-Nze" sceneMemberID="viewController">
+                <viewController title="User Submissions" id="mje-j4-Nze" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Sih-CT-349"/>
                         <viewControllerLayoutGuide type="bottom" id="Ib5-dd-8t4"/>
@@ -141,7 +135,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item 2" id="r6I-lh-1SX"/>
+                    <tabBarItem key="tabBarItem" title="User Submissions" image="second" id="r6I-lh-1SX">
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
+                                <color key="value" red="0.72549019607843135" green="0.16470588235294117" blue="0.2627450980392157" alpha="1" colorSpace="calibratedRGB"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </tabBarItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="utu-EL-KCB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -165,11 +165,17 @@
             </objects>
             <point key="canvasLocation" x="-1724" y="-429"/>
         </scene>
-        <!--Item-->
+        <!--My Submissions-->
         <scene sceneID="dXH-3w-Ylc">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="VvT-nd-gTN" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="7Ti-d0-d7i"/>
+                <navigationController title="My Submissions" automaticallyAdjustsScrollViewInsets="NO" id="VvT-nd-gTN" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="My Submissions" image="first" id="7Ti-d0-d7i">
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
+                                <color key="value" red="0.72549019607843135" green="0.16470588235294117" blue="0.2627450980392157" alpha="1" colorSpace="calibratedRGB"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="ZhW-jH-zR4">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -185,4 +191,9 @@
             <point key="canvasLocation" x="-718" y="-816"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="first" width="30" height="30"/>
+        <image name="second" width="30" height="30"/>
+    </resources>
+    <color key="tintColor" red="0.80000000000000004" green="0.15294117647058825" blue="0.25882352941176473" alpha="1" colorSpace="calibratedRGB"/>
 </document>

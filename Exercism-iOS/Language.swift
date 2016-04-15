@@ -10,5 +10,5 @@ import UIKit
 
 class Language: NSObject {
     var name = String()
-    var exercises = [Exercise]()
+    lazy var exercises = [Exercise]()
 }
