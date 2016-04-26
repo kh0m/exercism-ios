@@ -9,5 +9,7 @@
 import UIKit
 
 class Iteration: NSObject {
-    lazy var comments: [String] = [String]()
+    lazy var version: Int = 0
+    lazy var code: String = ""
+    lazy var comments: NSArray = NSArray()
 }

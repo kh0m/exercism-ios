@@ -10,6 +10,7 @@ import UIKit
 
 class Exercise: NSObject {
     var name: String = ""
-    var language: String = ""
+    lazy var language = Language()
     var isActive: Bool = true
+    lazy var iterations = [Iteration]()
 }

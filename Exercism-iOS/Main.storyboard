@@ -117,6 +117,9 @@
                             <constraint firstItem="rM9-io-AHw" firstAttribute="trailing" secondItem="tnI-TD-FvG" secondAttribute="trailingMargin" id="q71-ag-QMH"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="submissionCodeView" destination="fvx-B8-oOE" id="EJo-3G-e9e"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bOd-Ve-Zqg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

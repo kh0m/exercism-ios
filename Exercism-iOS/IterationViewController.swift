@@ -10,6 +10,8 @@ import UIKit
 
 class IterationViewController: UIViewController {
 
+    @IBOutlet weak var submissionCodeView: UITextView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
