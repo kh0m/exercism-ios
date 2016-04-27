@@ -10,7 +10,7 @@ import UIKit
 
 class ExerciseViewController: UIPageViewController, UIPageViewControllerDataSource {
     
-    lazy var exercise = Exercise()
+    lazy var exercise: Exercise = Exercise()
     lazy var iterationViewControllers = [UIViewController]()
     
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
@@ -25,7 +25,7 @@ class ExerciseViewController: UIPageViewController, UIPageViewControllerDataSour
         self.navigationItem.title = exercise.name
         self.view.backgroundColor = UIColor(red: 0.85, green: 0.11, blue: 0.31, alpha: 1.0)
         
-        print(exercise.iterations.count)
+        print(exercise.iterations?.allObjects.count)
         
         for _ in (0..<3) {
             let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("IterationViewController") as! IterationViewController

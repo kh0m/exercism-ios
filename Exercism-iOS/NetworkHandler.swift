@@ -30,6 +30,17 @@ class NetworkHandler: NSObject {
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let managedContext = appDelegate.managedObjectContext
         
+        // first delete any instances of the Language entity
+        let fetchRequest = NSFetchRequest(entityName: "Language")
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+        
+        do {
+            try managedContext.executeRequest(deleteRequest)
+        } catch let error as NSError {
+            print("Could not delete \(error), \(error.userInfo)")
+        }
+        
+        // then fill it
         if let exKey = Exercism["apiKey"] {
             let url = NSURL(string: "http://exercism.io/api/v1/exercises?key=\(exKey)")
             
@@ -40,8 +51,11 @@ class NetworkHandler: NSObject {
                 do {
                     let json = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions()) as? NSDictionary
                     for (key, value) in json! {
-                        let lang = Language()
-                        lang.name = key as! String
+
+                        let entity = NSEntityDescription.entityForName("Language", inManagedObjectContext: managedContext)
+                        let lang = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext) as! Language
+                        
+                        lang.name = key as? String
                         for v in (value as? NSArray)! {
                             let entity = NSEntityDescription.entityForName("Exercise", inManagedObjectContext: managedContext)
                             let ex = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext)
@@ -59,9 +73,8 @@ class NetworkHandler: NSObject {
                                 print("Could not save \(error), \(error.userInfo)")
                             }
                         }
-                        appDelegate.appData.languages.append(lang)
+                        
                     }
-                    print("app languages: \(appDelegate.appData.languages.count)")
                 } catch {
                     print(error)
                 }

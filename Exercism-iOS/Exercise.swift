@@ -2,15 +2,16 @@
 //  Exercise.swift
 //  Exercism-iOS
 //
-//  Created by Hom, Kenneth on 4/8/16.
+//  Created by Hom, Kenneth on 4/27/16.
 //  Copyright © 2016 Hom, Kenneth. All rights reserved.
 //
 
-import UIKit
+import Foundation
+import CoreData
 
-class Exercise: NSObject {
-    var name: String = ""
-    lazy var language = Language()
-    var isActive: Bool = true
-    lazy var iterations = [Iteration]()
+
+class Exercise: NSManagedObject {
+
+// Insert code here to add functionality to your managed object subclass
+
 }
