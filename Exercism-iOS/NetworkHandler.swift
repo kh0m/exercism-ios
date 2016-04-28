@@ -50,6 +50,7 @@ class NetworkHandler: NSObject {
                 print(dataString)
                 do {
                     let json = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions()) as? NSDictionary
+                    
                     for (key, value) in json! {
 
                         let entity = NSEntityDescription.entityForName("Language", inManagedObjectContext: managedContext)
@@ -66,15 +67,15 @@ class NetworkHandler: NSObject {
 
                             let isActive = (v["state"] as! String == "active" ? true : false)
                             ex.setValue(isActive, forKey: "isActive")
-                            
-                            do {
-                                try managedContext.save()
-                            } catch let error as NSError {
-                                print("Could not save \(error), \(error.userInfo)")
-                            }
                         }
-                        
                     }
+                    
+                    do {
+                        try managedContext.save()
+                    } catch let error as NSError {
+                        print("Could not save \(error), \(error.userInfo)")
+                    }
+                    
                 } catch {
                     print(error)
                 }
@@ -129,50 +130,55 @@ class NetworkHandler: NSObject {
 //
 //    }
 //    
-//    class func getIterations(exercise: Exercise, closure: () -> Void) {
-//        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-//
-//        if let exKey = Exercism["apiKey"] { // for when we get the real api
-//            let url = NSURL(string: "http://localhost:4567/api/v1/submissions/elixir/acronym/iterations?key=aug949")
-//            let task = NSURLSession.sharedSession().dataTaskWithURL(url!) { (data, response, error) in
-//                let dataString = NSString(data: data!, encoding: NSUTF8StringEncoding)
-//                print(dataString)
-//                do {
-//                    let json = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions()) as? NSArray
-//                        for object in json! {
-//                            guard let submission = object as? [String:AnyObject],
-//                                let submissionInfo = submission["submission"],
-//                                let submissionCode = submissionInfo["solution"] as? NSDictionary,
-//                                let comments = submission["comments"]
-//                            else {
-//                                print("no good")
-//                                closure()
-//                                return
-//                            }
-//                            print("HELLLLLOOOOO \(submissionInfo) \(comments)")
-//                            for lang in appDelegate.appData.languages {
-//                                if (lang.name == exercise.language.name) {
-//                                    for ex in lang.exercises {
-//                                        if (ex.name == exercise.name) {
-//                                            let iteration = Iteration()
-//                                            iteration.comments = comments as! NSArray
-//                                            iteration.code = submissionCode.allValues.first as! String
-//                                            ex.iterations.append(iteration)
-//                                            break
-//                                        }
-//                                    }
-//                                }
-//                            }
-//                        }
-//                } catch {
-//                    print(error)
-//                }
-//            }
-//            closure()
-//            task.resume()
-//            
-//        }
-//    }
+    class func getIterations(exercise: Exercise) {
+        print(exercise)
+        
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let managedContext = appDelegate.managedObjectContext
+        
+        // first delete any instances of the Iteration entity
+        let fetchRequest = NSFetchRequest(entityName: "Iteration")
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+        
+        do {
+            try managedContext.executeRequest(deleteRequest)
+        } catch let error as NSError {
+            print("Could not delete \(error), \(error.userInfo)")
+        }
+
+        if let exKey = Exercism["apiKey"] { // for when we get the real api
+            let url = NSURL(string: "http://localhost:4567/api/v1/submissions/elixir/acronym/iterations?key=aug949")
+            let task = NSURLSession.sharedSession().dataTaskWithURL(url!) { (data, response, error) in
+                do {
+                    let json = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions()) as? NSArray
+                    for object in json! {
+                        
+                        let entity = NSEntityDescription.entityForName("Iteration", inManagedObjectContext: managedContext)
+                        let iteration = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext) as! Iteration
+                        
+                        print("OBJEEEEECT: \(object["submission"]!!["solution"])")
+                        let submission = object["submission"]
+                        let solution = submission!!["solution"]
+                        iteration.code = solution as? String
+                        
+//                        iteration.exercise = exercise
+                        print("exercise iterations: \(exercise.iterations?.allObjects.count)")
+                    }
+                    
+                } catch {
+                    print(error)
+                }
+                
+                do {
+                    try managedContext.save()
+                } catch let error as NSError {
+                    print("Could not save \(error), \(error.userInfo)")
+                }
+            }
+            task.resume()
+            
+        }
+    }
 }
 
 

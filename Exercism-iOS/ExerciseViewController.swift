@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class ExerciseViewController: UIPageViewController, UIPageViewControllerDataSource {
     
@@ -25,7 +26,20 @@ class ExerciseViewController: UIPageViewController, UIPageViewControllerDataSour
         self.navigationItem.title = exercise.name
         self.view.backgroundColor = UIColor(red: 0.85, green: 0.11, blue: 0.31, alpha: 1.0)
         
-        print(exercise.iterations?.allObjects.count)
+        NetworkHandler.getIterations(exercise)
+        
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let managedContext = appDelegate.managedObjectContext
+        
+        let fetchRequest = NSFetchRequest(entityName: "Iteration")
+        
+        do {
+            let iterations = try managedContext.executeFetchRequest(fetchRequest) as! [Iteration]
+            print("iteration count: \(iterations.count)")
+        } catch let error as NSError {
+            print("Could not fetch \(error), \(error.userInfo)")
+        }
+
         
         for _ in (0..<3) {
             let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("IterationViewController") as! IterationViewController

@@ -2,7 +2,7 @@
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10171" systemVersion="15E65" minimumToolsVersion="Xcode 7.0">
     <entity name="Comment" representedClassName=".Comment" syncable="YES">
         <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="iteration" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Iteration" inverseName="comments" inverseEntity="Iteration" syncable="YES"/>
+        <relationship name="iteration" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Iteration" inverseName="comments" inverseEntity="Iteration" syncable="YES"/>
     </entity>
     <entity name="Exercise" representedClassName=".Exercise" syncable="YES">
         <attribute name="isActive" optional="YES" attributeType="Boolean" syncable="YES"/>
@@ -13,7 +13,7 @@
     <entity name="Iteration" representedClassName=".Iteration" syncable="YES">
         <attribute name="code" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="version" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <relationship name="comments" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Comment" inverseName="iteration" inverseEntity="Comment" syncable="YES"/>
+        <relationship name="comments" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Comment" inverseName="iteration" inverseEntity="Comment" syncable="YES"/>
         <relationship name="exercise" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Exercise" inverseName="iterations" inverseEntity="Exercise" syncable="YES"/>
     </entity>
     <entity name="Language" representedClassName=".Language" syncable="YES">
@@ -21,9 +21,9 @@
         <relationship name="exercises" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Exercise" inverseName="language" inverseEntity="Exercise" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Comment" positionX="-27" positionY="72" width="128" height="75"/>
-        <element name="Exercise" positionX="-54" positionY="9" width="128" height="105"/>
-        <element name="Iteration" positionX="-45" positionY="45" width="128" height="105"/>
-        <element name="Language" positionX="-63" positionY="-18" width="128" height="75"/>
+        <element name="Comment" positionX="-2558" positionY="-3405" width="128" height="73"/>
+        <element name="Exercise" positionX="-3006" positionY="-3555" width="128" height="103"/>
+        <element name="Iteration" positionX="-2738" positionY="-3555" width="128" height="103"/>
+        <element name="Language" positionX="-3069" positionY="-3717" width="128" height="75"/>
     </elements>
 </model>
