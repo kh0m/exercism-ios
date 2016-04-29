@@ -13,6 +13,7 @@ class ExerciseViewController: UIPageViewController, UIPageViewControllerDataSour
     
     lazy var exercise: Exercise = Exercise()
     lazy var iterationViewControllers = [UIViewController]()
+    var networkHandler: NetworkHandler?
     
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     
@@ -26,7 +27,7 @@ class ExerciseViewController: UIPageViewController, UIPageViewControllerDataSour
         self.navigationItem.title = exercise.name
         self.view.backgroundColor = UIColor(red: 0.85, green: 0.11, blue: 0.31, alpha: 1.0)
         
-        NetworkHandler.getIterations(exercise)
+        networkHandler!.getIterations(exercise)
         
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let managedContext = appDelegate.managedObjectContext

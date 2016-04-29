@@ -29,6 +29,7 @@
 		D490C2841CD1172A00DD68D9 /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = D490C2811CD1172A00DD68D9 /* Language.swift */; };
 		D490C2851CD1172A00DD68D9 /* Iteration.swift in Sources */ = {isa = PBXBuildFile; fileRef = D490C2821CD1172A00DD68D9 /* Iteration.swift */; };
 		D490C2861CD1172A00DD68D9 /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = D490C2831CD1172A00DD68D9 /* Exercise.swift */; };
+		D490C2881CD3947600DD68D9 /* IterationsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D490C2871CD3947600DD68D9 /* IterationsRequest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +70,7 @@
 		D490C2811CD1172A00DD68D9 /* Language.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
 		D490C2821CD1172A00DD68D9 /* Iteration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Iteration.swift; sourceTree = "<group>"; };
 		D490C2831CD1172A00DD68D9 /* Exercise.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
+		D490C2871CD3947600DD68D9 /* IterationsRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IterationsRequest.swift; sourceTree = "<group>"; };
 		DE0D273CBB651E717D3FA6D4 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -156,6 +158,7 @@
 			isa = PBXGroup;
 			children = (
 				D464058B1CB5AB1B001B5DF6 /* NetworkHandler.swift */,
+				D490C2871CD3947600DD68D9 /* IterationsRequest.swift */,
 			);
 			name = Network;
 			sourceTree = "<group>";
@@ -352,6 +355,7 @@
 				D46405681CB5A8A4001B5DF6 /* SecondViewController.swift in Sources */,
 				D490C27F1CD1168B00DD68D9 /* Language+CoreDataProperties.swift in Sources */,
 				D490C2801CD1168B00DD68D9 /* Exercise+CoreDataProperties.swift in Sources */,
+				D490C2881CD3947600DD68D9 /* IterationsRequest.swift in Sources */,
 				D490C2861CD1172A00DD68D9 /* Exercise.swift in Sources */,
 				D46405A81CBC2C6C001B5DF6 /* ExerciseViewController.swift in Sources */,
 				D490C27D1CD1168B00DD68D9 /* Comment.swift in Sources */,

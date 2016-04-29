@@ -12,9 +12,8 @@ import CoreData
 
 class ExercisesTableViewController: UITableViewController {
     
-    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-    
     lazy var languages = [Language]()
+    var networkHandler: NetworkHandler?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +25,8 @@ class ExercisesTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        networkHandler = appDelegate.networkHandler
+        
         let managedContext = appDelegate.managedObjectContext
 
         let fetchRequest = NSFetchRequest(entityName: "Language")
@@ -87,6 +88,7 @@ class ExercisesTableViewController: UITableViewController {
             let lang = languages[path.section]
             let ex = lang.valueForKey("exercises")?.allObjects[path.row]
             
+            vc.networkHandler = networkHandler
             vc.exercise = ex as! Exercise
         }
     }
