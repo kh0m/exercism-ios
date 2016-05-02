@@ -27,7 +27,11 @@ class ExerciseViewController: UIPageViewController, UIPageViewControllerDataSour
         self.navigationItem.title = exercise.name
         self.view.backgroundColor = UIColor(red: 0.85, green: 0.11, blue: 0.31, alpha: 1.0)
         
-        networkHandler!.getIterations(exercise)
+        networkHandler!.getIterations(exercise, completion: {
+            // update the pull-to-refresh
+            // refresh table?
+            return true
+        })
         
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let managedContext = appDelegate.managedObjectContext
