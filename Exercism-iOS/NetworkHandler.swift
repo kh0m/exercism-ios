@@ -113,7 +113,7 @@ class NetworkHandler: NSObject {
             }
             
             // get all iterations for each exercise
-            let url = NSURL(string: "http://localhost:4567/api/v1/submissions/elixir/acronym/iterations?key=aug949")
+            let url = NSURL(string: "http://localhost:4567/api/v1/submissions/elixir/acronym/iterations?key=aug949") // currently just isaac
             let task = NSURLSession.sharedSession().dataTaskWithURL(url!) { (data, response, error) in
                 do {
                     let json = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions()) as? NSArray
