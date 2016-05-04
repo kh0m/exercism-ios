@@ -26,8 +26,13 @@ class ExerciseViewController: UIPageViewController, UIPageViewControllerDataSour
         self.navigationItem.title = exercise.name
         self.view.backgroundColor = UIColor(red: 0.85, green: 0.11, blue: 0.31, alpha: 1.0)
         
-        NetworkHandler.getIterations(exercise)
-        
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        createIterationViews()
+    }
+    
+    private func createIterationViews() {
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let managedContext = appDelegate.managedObjectContext
         
@@ -35,24 +40,23 @@ class ExerciseViewController: UIPageViewController, UIPageViewControllerDataSour
         
         do {
             let iterations = try managedContext.executeFetchRequest(fetchRequest) as! [Iteration]
-            print("iteration count: \(iterations.count)")
+            print("total iteration count: \(iterations.count)")
+            
+            for iteration in iterations {
+                let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("IterationViewController") as! IterationViewController
+                print("ITERATION \(iteration.code)")
+                controller.submissionCodeView = UITextView()
+                controller.codeText = iteration.code
+                iterationViewControllers.append(controller)
+            }
+            
+            if let firstViewController = iterationViewControllers.first {
+                setViewControllers([firstViewController], direction: .Forward, animated: true, completion: nil)
+            }
+
         } catch let error as NSError {
             print("Could not fetch \(error), \(error.userInfo)")
         }
-
-        
-        for _ in (0..<3) {
-            let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("IterationViewController") as! IterationViewController
-            iterationViewControllers.append(vc)
-        }
-        
-        if let firstViewController = iterationViewControllers.first {
-            setViewControllers([firstViewController],
-                               direction: .Forward,
-                               animated: true,
-                               completion: nil)
-        }
-        
     }
     
     

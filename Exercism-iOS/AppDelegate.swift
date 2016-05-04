@@ -32,7 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print("Parameters: \(parameters)")
             Github["accessToken"] = parameters["access_token"]
             NetworkHandler.getUser(oauthswift)
-            NetworkHandler.getExercises()
+            NetworkHandler.getExercises({ NetworkHandler.getIterations() })
             
             }, failure: { error in
                 print(error.localizedDescription)

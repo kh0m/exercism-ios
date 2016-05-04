@@ -26,7 +26,7 @@ class NetworkHandler: NSObject {
         }
     }
     
-    class func getExercises() {
+    class func getExercises(completion: () -> Void) {
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let managedContext = appDelegate.managedObjectContext
         
@@ -76,6 +76,8 @@ class NetworkHandler: NSObject {
                         print("Could not save \(error), \(error.userInfo)")
                     }
                     
+                    completion()
+                    
                 } catch {
                     print(error)
                 }
@@ -85,68 +87,32 @@ class NetworkHandler: NSObject {
         }
     }
     
-//    class func getSubmissionKey(exercise: Exercise) {
-//        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-//        
-//        if let exKey = Exercism["apiKey"] {
-//            let url = NSURL(string: "http://exercism.io/api/v1/submissions/\(exercise.language)/\(exercise.name)?key=\(exKey)")
-//            let task = NSURLSession.sharedSession().dataTaskWithURL(url!) {(data, response, error) in
-//                let dataString = NSString(data: data!, encoding: NSUTF8StringEncoding)
-//                print(dataString)
-//                do {
-//                    let json = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions()) as? NSDictionary
-//                    
-//                    print(json!["url"])
-//                    let jsonurl = json!["url"] as! String
-//                    let newurl = jsonurl.stringByReplacingOccurrencesOfString("exercism.io", withString: "exercism.io/api/v1")
-//                    let nsurl = NSURL(string: newurl)!
-//                    
-//                    self.getIterations(nsurl)
-//                    
-//                    print("app languages: \(appDelegate.appData.languages.count)")
-//                    
-//                } catch {
-//                    print(error)
-//                }
-//            }
-//            task.resume()
-//        }
-//
-//    }
-//    
-//    private class func getIterations(url: NSURL) {
-//        print(url)
-//        let task = NSURLSession.sharedSession().dataTaskWithURL(url) { (data, response, error) in
-//            let dataString = NSString(data: data!, encoding: NSUTF8StringEncoding)
-//            print(dataString)
-//            do {
-//                let json = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions()) as? NSDictionary
-//                print(json!)
-//            } catch {
-//                print(error)
-//            }
-//        }
-//        task.resume()
-//
-//    }
-//    
-    class func getIterations(exercise: Exercise) {
-        print(exercise)
-        
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let managedContext = appDelegate.managedObjectContext
-        
-        // first delete any instances of the Iteration entity
-        let fetchRequest = NSFetchRequest(entityName: "Iteration")
-        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
-        
-        do {
-            try managedContext.executeRequest(deleteRequest)
-        } catch let error as NSError {
-            print("Could not delete \(error), \(error.userInfo)")
-        }
 
+    class func getIterations() {
         if let exKey = Exercism["apiKey"] { // for when we get the real api
+
+            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            let managedContext = appDelegate.managedObjectContext
+            
+            // first delete any instances of the Iteration entity
+            let fetchRequest = NSFetchRequest(entityName: "Iteration")
+            let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+            
+            do {
+                try managedContext.executeRequest(deleteRequest)
+            } catch let error as NSError {
+                print("Could not delete \(error), \(error.userInfo)")
+            }
+            
+            // get all exercises
+            let exercisesFetchRequest = NSFetchRequest(entityName: "Exercise")
+            do {
+                let exercises = try managedContext.executeRequest(exercisesFetchRequest)
+            } catch let error as NSError {
+                print("Could not fetch \(error), \(error.userInfo)")
+            }
+            
+            // get all iterations for each exercise
             let url = NSURL(string: "http://localhost:4567/api/v1/submissions/elixir/acronym/iterations?key=aug949")
             let task = NSURLSession.sharedSession().dataTaskWithURL(url!) { (data, response, error) in
                 do {
@@ -156,29 +122,80 @@ class NetworkHandler: NSObject {
                         let entity = NSEntityDescription.entityForName("Iteration", inManagedObjectContext: managedContext)
                         let iteration = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext) as! Iteration
                         
-                        print("OBJEEEEECT: \(object["submission"]!!["solution"])")
-                        let submission = object["submission"]
-                        let solution = submission!!["solution"]
-                        iteration.code = solution as? String
-                        
+                        let submission = object["submission"] as! NSDictionary
+                        let solution = submission.valueForKey("solution") as! NSDictionary
+                        let solutionCode = solution.allValues.first
+                        iteration.code = solutionCode as? String
 //                        iteration.exercise = exercise
-                        print("exercise iterations: \(exercise.iterations?.allObjects.count)")
+                        
+
+//                        print("exercise iterations: \(exercise.iterations?.allObjects.count)")
+                    }
+                    
+                    do {
+                        try managedContext.save()
+                    } catch let error as NSError {
+                        print("Could not save \(error), \(error.userInfo)")
                     }
                     
                 } catch {
                     print(error)
                 }
-                
-                do {
-                    try managedContext.save()
-                } catch let error as NSError {
-                    print("Could not save \(error), \(error.userInfo)")
+                    
+                    
                 }
-            }
-            task.resume()
-            
+                task.resume()
         }
     }
+    
+    
+    
+    
+    //    class func getSubmissionKey(exercise: Exercise) {
+    //        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    //
+    //        if let exKey = Exercism["apiKey"] {
+    //            let url = NSURL(string: "http://exercism.io/api/v1/submissions/\(exercise.language)/\(exercise.name)?key=\(exKey)")
+    //            let task = NSURLSession.sharedSession().dataTaskWithURL(url!) {(data, response, error) in
+    //                let dataString = NSString(data: data!, encoding: NSUTF8StringEncoding)
+    //                print(dataString)
+    //                do {
+    //                    let json = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions()) as? NSDictionary
+    //
+    //                    print(json!["url"])
+    //                    let jsonurl = json!["url"] as! String
+    //                    let newurl = jsonurl.stringByReplacingOccurrencesOfString("exercism.io", withString: "exercism.io/api/v1")
+    //                    let nsurl = NSURL(string: newurl)!
+    //
+    //                    self.getIterations(nsurl)
+    //
+    //                    print("app languages: \(appDelegate.appData.languages.count)")
+    //
+    //                } catch {
+    //                    print(error)
+    //                }
+    //            }
+    //            task.resume()
+    //        }
+    //
+    //    }
+    //
+    //    private class func getIterations(url: NSURL) {
+    //        print(url)
+    //        let task = NSURLSession.sharedSession().dataTaskWithURL(url) { (data, response, error) in
+    //            let dataString = NSString(data: data!, encoding: NSUTF8StringEncoding)
+    //            print(dataString)
+    //            do {
+    //                let json = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions()) as? NSDictionary
+    //                print(json!)
+    //            } catch {
+    //                print(error)
+    //            }
+    //        }
+    //        task.resume()
+    //
+    //    }
+    //
 }
 
 

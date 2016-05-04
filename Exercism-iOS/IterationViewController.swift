@@ -11,11 +11,14 @@ import UIKit
 class IterationViewController: UIViewController {
 
     @IBOutlet weak var submissionCodeView: UITextView!
+    var codeText: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        print("Iteration view loaded")
+        submissionCodeView.text = codeText!
     }
 
     override func didReceiveMemoryWarning() {
