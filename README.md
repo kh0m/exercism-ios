@@ -23,8 +23,14 @@ var Github =
         "consumerKey": "ABC",
         "consumerSecret": "123"
     ]
+let Exercism =
+    [
+        "apiKey": "456"
+    ]
 ```
-These values can be obtained by registering it in your GitHub settings under OAuth Applications.
+The GitHub values can be obtained by registering the app in your settings under OAuth Applications, and the exercism key can be obtained by signing up with them or cloning the site.
+
+Some of the web requests are currently being sent to my local copy of exercism. It includes a few new endpoints. You can find it [here](https://github.com/kh0m/exercism.io).
 
 ## License
 
