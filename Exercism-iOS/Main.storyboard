@@ -60,64 +60,110 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="fvx-B8-oOE">
-                                <rect key="frame" x="40" y="41" width="448" height="203"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="fvx-B8-oOE">
+                                <rect key="frame" x="20" y="76" width="560" height="168"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="203" id="CDX-G9-XIa"/>
+                                    <constraint firstAttribute="height" constant="168" id="5y4-LT-KQU"/>
                                 </constraints>
                                 <string key="text">THIS IS FOR THE CODE Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="CFT-GP-n6u">
-                                <rect key="frame" x="86" y="400" width="411" height="69"/>
+                                <rect key="frame" x="20" y="490" width="560" height="63"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="69" id="hQY-k8-gwe"/>
+                                    <constraint firstAttribute="height" constant="63" id="9Hg-j5-SAe"/>
                                 </constraints>
-                                <string key="text">THIS IS TO ADD COMMENTS Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <mutableString key="text">THIS IS TO ADD COMMENTS Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</mutableString>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rM9-io-AHw">
-                                <rect key="frame" x="20" y="264" width="560" height="128"/>
+                                <rect key="frame" x="20" y="299" width="560" height="152"/>
                                 <subviews>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ahk-yK-Xx5">
-                                        <rect key="frame" x="112" y="25" width="209" height="134"/>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="No Comments" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ahk-yK-Xx5">
+                                        <rect key="frame" x="112" y="15" width="423" height="109"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="134" id="7wn-0P-eBU"/>
-                                            <constraint firstAttribute="width" constant="209" id="o53-aF-ifp"/>
+                                            <constraint firstAttribute="height" constant="109" id="1b6-Jx-fuN"/>
+                                            <constraint firstAttribute="width" constant="423" id="NyB-kI-RLO"/>
                                         </constraints>
-                                        <string key="text">INDIVIDUAL COMMENT exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="ahk-yK-Xx5" secondAttribute="bottom" constant="-31" id="R5w-Um-f0c"/>
-                                    <constraint firstItem="ahk-yK-Xx5" firstAttribute="top" secondItem="rM9-io-AHw" secondAttribute="top" constant="25" id="UEC-pX-x2D"/>
-                                    <constraint firstItem="ahk-yK-Xx5" firstAttribute="leading" secondItem="rM9-io-AHw" secondAttribute="leading" constant="112" id="YZk-ff-h6M"/>
-                                    <constraint firstAttribute="trailing" secondItem="ahk-yK-Xx5" secondAttribute="trailing" constant="239" id="t5K-oR-oR1"/>
+                                    <constraint firstAttribute="bottom" secondItem="ahk-yK-Xx5" secondAttribute="bottom" constant="28" id="9qP-vn-ZOr"/>
+                                    <constraint firstAttribute="trailing" secondItem="ahk-yK-Xx5" secondAttribute="trailing" constant="25" id="MFM-Fc-gpf"/>
+                                    <constraint firstItem="ahk-yK-Xx5" firstAttribute="top" secondItem="rM9-io-AHw" secondAttribute="top" constant="15" id="l93-hd-Zza"/>
+                                    <constraint firstItem="ahk-yK-Xx5" firstAttribute="leading" secondItem="rM9-io-AHw" secondAttribute="leading" constant="112" id="n8i-La-aT9"/>
                                 </constraints>
                             </scrollView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Iteration Code" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ohe-p5-MOS">
+                                <rect key="frame" x="20" y="39" width="115" height="29"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="29" id="Llg-Kj-66y"/>
+                                    <constraint firstAttribute="width" constant="115" id="h9n-oB-pc2"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.80000000000000004" green="0.1529411765" blue="0.25882352939999997" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Comments" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wIg-bE-2RR">
+                                <rect key="frame" x="20" y="252" width="87" height="39"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="87" id="oq9-zc-HfU"/>
+                                    <constraint firstAttribute="height" constant="39" id="soY-k1-jCk"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.80000000000000004" green="0.1529411765" blue="0.25882352939999997" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Comment" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a3t-uc-TjV">
+                                <rect key="frame" x="20" y="459" width="116" height="27"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="27" id="GtY-4z-xdb"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.80000000000000004" green="0.1529411765" blue="0.25882352939999997" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2kQ-5D-EBs">
+                                <rect key="frame" x="520" y="458" width="60" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="CnL-EE-Pdt"/>
+                                </constraints>
+                                <state key="normal" title="Submit"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="rM9-io-AHw" firstAttribute="leading" secondItem="tnI-TD-FvG" secondAttribute="leadingMargin" id="AB7-Er-yp4"/>
-                            <constraint firstItem="nxD-1l-96r" firstAttribute="top" secondItem="CFT-GP-n6u" secondAttribute="bottom" constant="131" id="AtT-Fw-DbE"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="fvx-B8-oOE" secondAttribute="trailing" constant="92" id="EDy-G0-qxy"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="CFT-GP-n6u" secondAttribute="trailing" constant="83" id="MBE-Ml-k43"/>
-                            <constraint firstItem="fvx-B8-oOE" firstAttribute="top" secondItem="Y71-wn-PiC" secondAttribute="bottom" constant="21" id="P0Y-sI-6dM"/>
-                            <constraint firstItem="rM9-io-AHw" firstAttribute="top" secondItem="fvx-B8-oOE" secondAttribute="bottom" constant="20" id="Pp4-Zm-JWh"/>
-                            <constraint firstItem="CFT-GP-n6u" firstAttribute="leading" secondItem="tnI-TD-FvG" secondAttribute="leadingMargin" constant="66" id="WD3-xk-cyh"/>
-                            <constraint firstItem="CFT-GP-n6u" firstAttribute="top" secondItem="rM9-io-AHw" secondAttribute="bottom" constant="8" symbolic="YES" id="dfh-4H-21z"/>
-                            <constraint firstItem="fvx-B8-oOE" firstAttribute="leading" secondItem="tnI-TD-FvG" secondAttribute="leadingMargin" constant="20" id="erZ-fa-ic0"/>
-                            <constraint firstItem="rM9-io-AHw" firstAttribute="trailing" secondItem="tnI-TD-FvG" secondAttribute="trailingMargin" id="q71-ag-QMH"/>
+                            <constraint firstItem="wIg-bE-2RR" firstAttribute="top" secondItem="fvx-B8-oOE" secondAttribute="bottom" constant="8" symbolic="YES" id="1M2-xs-PRQ"/>
+                            <constraint firstItem="a3t-uc-TjV" firstAttribute="leading" secondItem="CFT-GP-n6u" secondAttribute="leading" id="4ae-lu-3ci"/>
+                            <constraint firstItem="2kQ-5D-EBs" firstAttribute="centerY" secondItem="a3t-uc-TjV" secondAttribute="centerY" id="6lc-L7-87m"/>
+                            <constraint firstItem="fvx-B8-oOE" firstAttribute="leading" secondItem="wIg-bE-2RR" secondAttribute="leading" id="UPI-cu-XON"/>
+                            <constraint firstItem="nxD-1l-96r" firstAttribute="top" secondItem="CFT-GP-n6u" secondAttribute="bottom" constant="47" id="Wca-G8-H4Y"/>
+                            <constraint firstItem="2kQ-5D-EBs" firstAttribute="trailing" secondItem="CFT-GP-n6u" secondAttribute="trailing" id="YDI-oT-mVb"/>
+                            <constraint firstItem="ohe-p5-MOS" firstAttribute="leading" secondItem="tnI-TD-FvG" secondAttribute="leadingMargin" id="d9S-Dg-ksu"/>
+                            <constraint firstItem="ohe-p5-MOS" firstAttribute="top" secondItem="Y71-wn-PiC" secondAttribute="bottom" constant="19" id="dVs-S4-Oed"/>
+                            <constraint firstItem="ohe-p5-MOS" firstAttribute="centerX" secondItem="a3t-uc-TjV" secondAttribute="centerX" id="dW0-6F-UzB"/>
+                            <constraint firstItem="wIg-bE-2RR" firstAttribute="leading" secondItem="rM9-io-AHw" secondAttribute="leading" id="fYt-zo-dHD"/>
+                            <constraint firstItem="rM9-io-AHw" firstAttribute="trailing" secondItem="CFT-GP-n6u" secondAttribute="trailing" id="hoQ-7E-IO0"/>
+                            <constraint firstItem="a3t-uc-TjV" firstAttribute="top" secondItem="rM9-io-AHw" secondAttribute="bottom" constant="8" symbolic="YES" id="muQ-hX-Q87"/>
+                            <constraint firstItem="fvx-B8-oOE" firstAttribute="trailing" secondItem="rM9-io-AHw" secondAttribute="trailing" id="nng-P7-aEC"/>
+                            <constraint firstItem="rM9-io-AHw" firstAttribute="leading" secondItem="a3t-uc-TjV" secondAttribute="leading" id="pyi-rF-oLP"/>
+                            <constraint firstItem="rM9-io-AHw" firstAttribute="top" secondItem="wIg-bE-2RR" secondAttribute="bottom" constant="8" symbolic="YES" id="rP4-Ul-Jyx"/>
+                            <constraint firstItem="fvx-B8-oOE" firstAttribute="trailing" secondItem="tnI-TD-FvG" secondAttribute="trailingMargin" id="sQc-1N-hMA"/>
+                            <constraint firstItem="fvx-B8-oOE" firstAttribute="top" secondItem="ohe-p5-MOS" secondAttribute="bottom" constant="8" symbolic="YES" id="uel-YO-id7"/>
+                            <constraint firstItem="CFT-GP-n6u" firstAttribute="top" secondItem="a3t-uc-TjV" secondAttribute="bottom" constant="4" id="w6V-dD-0mm"/>
+                            <constraint firstItem="ohe-p5-MOS" firstAttribute="leading" secondItem="fvx-B8-oOE" secondAttribute="leading" id="yjd-88-3NN"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="commentView" destination="ahk-yK-Xx5" id="7aS-bv-3ER"/>
+                        <outlet property="commentsScrollView" destination="rM9-io-AHw" id="r5u-e4-wpW"/>
                         <outlet property="submissionCodeView" destination="fvx-B8-oOE" id="EJo-3G-e9e"/>
                     </connections>
                 </viewController>

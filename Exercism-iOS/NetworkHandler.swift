@@ -126,10 +126,17 @@ class NetworkHandler: NSObject {
                         let solution = submission.valueForKey("solution") as! NSDictionary
                         let solutionCode = solution.allValues.first
                         iteration.code = solutionCode as? String
-//                        iteration.exercise = exercise
                         
-
-//                        print("exercise iterations: \(exercise.iterations?.allObjects.count)")
+                        let comments = object["comments"] as! NSArray
+                        for comment in comments {
+                            let comment = comment as! NSDictionary
+                            
+                            // insert into core data
+                            let commentEntity = NSEntityDescription.entityForName("Comment", inManagedObjectContext: managedContext)
+                            let managedComment = NSManagedObject(entity: commentEntity!, insertIntoManagedObjectContext: managedContext) as! Comment
+                            managedComment.iteration = iteration
+                            managedComment.text = comment.valueForKey("body") as? String // or should I use body
+                        }
                     }
                     
                     do {

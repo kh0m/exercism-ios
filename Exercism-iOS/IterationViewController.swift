@@ -9,16 +9,33 @@
 import UIKit
 
 class IterationViewController: UIViewController {
+    
+    var iteration: Iteration?
 
     @IBOutlet weak var submissionCodeView: UITextView!
-    var codeText: String?
+    
+    @IBOutlet weak var commentsScrollView: UIScrollView!
+
+    @IBOutlet weak var commentView: UITextView!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        print("Iteration view loaded")
-        submissionCodeView.text = codeText!
+        
+        // code view
+        submissionCodeView.text = iteration!.code
+        
+        // make comment views for the iteration
+        for comment in iteration!.comments! {
+            if let commentText = comment.valueForKey("text") as? String {
+                commentView.text = commentText
+            }
+        }
+        
+
+        
     }
 
     override func didReceiveMemoryWarning() {

@@ -24,7 +24,7 @@ class ExerciseViewController: UIPageViewController, UIPageViewControllerDataSour
         dataSource = self
         
         self.navigationItem.title = exercise.name
-        self.view.backgroundColor = UIColor(red: 0.85, green: 0.11, blue: 0.31, alpha: 1.0)
+        self.view.backgroundColor = UIColor.grayColor()
         
     }
     
@@ -44,9 +44,7 @@ class ExerciseViewController: UIPageViewController, UIPageViewControllerDataSour
             
             for iteration in iterations {
                 let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("IterationViewController") as! IterationViewController
-                print("ITERATION \(iteration.code)")
-                controller.submissionCodeView = UITextView()
-                controller.codeText = iteration.code
+                controller.iteration = iteration
                 iterationViewControllers.append(controller)
             }
             
