@@ -93,48 +93,53 @@ class NetworkHandler: NSObject {
         let operation = IterationsRequest(ex: exercise)
         
         
+        
         // first delete any instances of the Iteration entity
         let fetchRequest = NSFetchRequest(entityName: "Iteration")
         let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
         
         do {
-            try context?.executeRequest(deleteRequest)
+            try mainContext?.executeRequest(deleteRequest)
         } catch let error as NSError {
             print("Could not delete \(error), \(error.userInfo)")
         }
         
-            let url = NSURL(string: "http://localhost:4567/api/v1/submissions/elixir/acronym/iterations?key=aug949")
-            let task = NSURLSession.sharedSession().dataTaskWithURL(url!) { (data, response, error) in
-                do {
-                    let json = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions()) as? NSArray
-                    for object in json! {
-                        
-                        let entity = NSEntityDescription.entityForName("Iteration", inManagedObjectContext: self.context!)
-                        let iteration = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: self.context) as! Iteration
-                        
-                        print("OBJEEEEECT: \(object["submission"]!!["solution"])")
-                        let submission = object["submission"]
-                        let solution = submission!!["solution"]
-                        iteration.code = solution as? String
-                        
-                        iteration.exercise = self.exercise
-                        print("exercise iterations: \(self.exercise!.iterations?.allObjects.count)")
-                    }
+        var delegate = self
+        struct SessionProperties {
+            static let identifier : String! = "url_session_get_data"
+        }
+        var configuration = NSURLSessionConfiguration.backgroundSessionConfigurationWithIdentifier(SessionProperties.identifier)
+        let session = NSURLSession(configuration: configuration, delegate: operation, delegateQueue: queue)
+        let url = NSURL(string: "http://localhost:4567/api/v1/submissions/elixir/acronym/iterations?key=aug949")
+
+        let task = session.dataTaskWithURL(url!) { (data, response, error) in
+            do {
+                let json = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions()) as? NSArray
+                for object in json! {
                     
-                } catch {
-                    print(error)
+                    let entity = NSEntityDescription.entityForName("Iteration", inManagedObjectContext: self.mainContext!)
+                    let iteration = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: self.mainContext) as! Iteration
+                    
+                    print("OBJEEEEECT: \(object["submission"]!!["solution"])")
+                    let submission = object["submission"]
+                    let solution = submission!!["solution"]
+                    iteration.code = solution as? String
+                    
+                    iteration.exercise = self.exercise
+                    print("exercise iterations: \(self.exercise!.iterations?.allObjects.count)")
                 }
                 
-                do {
-                    try self.context!.save()
-                } catch let error as NSError {
-                    print("Could not save \(error), \(error.userInfo)")
-                }
+            } catch {
+                print(error)
             }
-            task.resume()
             
+            do {
+                try self.mainContext!.save()
+            } catch let error as NSError {
+                print("Could not save \(error), \(error.userInfo)")
+            }
+        }
         
-        operation.URLSession(NSURLSession.sharedSession(), dataTask: <#T##NSURLSessionDataTask#>, didCompleteWithError: error)
         queue.addOperation(operation)
         completion()
     }

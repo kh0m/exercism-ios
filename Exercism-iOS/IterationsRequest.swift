@@ -73,6 +73,9 @@ class IterationsRequest: NSOperation, NSURLSessionDelegate {
         
         //PROCESS DATA INTO CORE DATA
         
+        
+        task.resume()
+        
         finished = true
     }
 }
