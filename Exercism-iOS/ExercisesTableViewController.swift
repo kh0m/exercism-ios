@@ -16,6 +16,7 @@ class ExercisesTableViewController: UITableViewController {
     
     lazy var languages = [Language]()
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -24,6 +25,9 @@ class ExercisesTableViewController: UITableViewController {
         
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        authorize({
+            self.tableView.reloadData()
+        })
         
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let managedContext = appDelegate.managedObjectContext
@@ -128,7 +132,41 @@ class ExercisesTableViewController: UITableViewController {
      }
      */
     
+}
 
+extension ExercisesTableViewController {
+    func authorize(completion: () -> Void) {
+    
+        let oauthswift = OAuth2Swift(
+            consumerKey:    Github["consumerKey"]!,
+            consumerSecret: Github["consumerSecret"]!,
+            authorizeUrl:   "https://github.com/login/oauth/authorize",
+            accessTokenUrl: "https://github.com/login/oauth/access_token",
+            responseType:   "code"
+        )
+        
+        let state: String = generateStateWithLength(20) as String
+        
+        let loginController = LoginViewController()
+        oauthswift.authorize_url_handler = loginController
+        
+        oauthswift.authorizeWithCallbackURL( NSURL(string: "Exercism-iOS://oauth-callback/github")!, scope: "user,repo", state: state, success: {
+            credential, response, parameters in
+            
+            print("Parameters: \(parameters)")
+            Github["accessToken"] = parameters["access_token"]
+            NetworkHandler.getUser(oauthswift)
+            NetworkHandler.getExercises({ NetworkHandler.getIterations() })
+            
+            loginController.dismissWebViewController()
+            completion()
+            
+        }, failure: { error in
+        print(error.localizedDescription)
+        })
+        
+        
+    }
 
 }
 

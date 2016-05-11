@@ -145,6 +145,7 @@ class NetworkHandler: NSObject {
                         print("Could not save \(error), \(error.userInfo)")
                     }
                     
+                    
                 } catch {
                     print(error)
                 }
@@ -154,55 +155,6 @@ class NetworkHandler: NSObject {
                 task.resume()
         }
     }
-    
-    
-    
-    
-    //    class func getSubmissionKey(exercise: Exercise) {
-    //        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-    //
-    //        if let exKey = Exercism["apiKey"] {
-    //            let url = NSURL(string: "http://exercism.io/api/v1/submissions/\(exercise.language)/\(exercise.name)?key=\(exKey)")
-    //            let task = NSURLSession.sharedSession().dataTaskWithURL(url!) {(data, response, error) in
-    //                let dataString = NSString(data: data!, encoding: NSUTF8StringEncoding)
-    //                print(dataString)
-    //                do {
-    //                    let json = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions()) as? NSDictionary
-    //
-    //                    print(json!["url"])
-    //                    let jsonurl = json!["url"] as! String
-    //                    let newurl = jsonurl.stringByReplacingOccurrencesOfString("exercism.io", withString: "exercism.io/api/v1")
-    //                    let nsurl = NSURL(string: newurl)!
-    //
-    //                    self.getIterations(nsurl)
-    //
-    //                    print("app languages: \(appDelegate.appData.languages.count)")
-    //
-    //                } catch {
-    //                    print(error)
-    //                }
-    //            }
-    //            task.resume()
-    //        }
-    //
-    //    }
-    //
-    //    private class func getIterations(url: NSURL) {
-    //        print(url)
-    //        let task = NSURLSession.sharedSession().dataTaskWithURL(url) { (data, response, error) in
-    //            let dataString = NSString(data: data!, encoding: NSUTF8StringEncoding)
-    //            print(dataString)
-    //            do {
-    //                let json = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions()) as? NSDictionary
-    //                print(json!)
-    //            } catch {
-    //                print(error)
-    //            }
-    //        }
-    //        task.resume()
-    //
-    //    }
-    //
 }
 
 
