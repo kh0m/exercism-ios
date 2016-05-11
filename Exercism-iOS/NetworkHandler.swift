@@ -29,7 +29,7 @@ class NetworkHandler: NSObject {
         }
     }
     
-    class func getExercises() {
+    class func getExercises(completion: () -> Void) {
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let managedContext = appDelegate.managedObjectContext
         
@@ -78,6 +78,8 @@ class NetworkHandler: NSObject {
                     } catch let error as NSError {
                         print("Could not save \(error), \(error.userInfo)")
                     }
+                    
+                    completion()
                     
                 } catch {
                     print(error)
