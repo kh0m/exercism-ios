@@ -11,9 +11,9 @@ import CoreData
 
 class ExerciseViewController: UIPageViewController, UIPageViewControllerDataSource {
     
-    lazy var exercise: Exercise = Exercise()
-    lazy var iterationViewControllers = [UIViewController]()
+    var exercise: Exercise?
     var networkHandler: NetworkHandler?
+    lazy var submissionViewControllers = [UIViewController]()
     
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     
@@ -24,38 +24,32 @@ class ExerciseViewController: UIPageViewController, UIPageViewControllerDataSour
         
         dataSource = self
         
-        self.navigationItem.title = exercise.name
-        self.view.backgroundColor = UIColor(red: 0.85, green: 0.11, blue: 0.31, alpha: 1.0)
-        
-        networkHandler!.getIterations(exercise, completion: {
-            // update the pull-to-refresh
-            // refresh table?
-            return true
-        })
+        self.navigationItem.title = exercise!.name
+        self.view.backgroundColor = UIColor.grayColor()
         
     }
     
     override func viewDidAppear(animated: Bool) {
-        createIterationViews()
+        createSubmissionViews()
     }
     
-    private func createIterationViews() {
+    private func createSubmissionViews() {
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let managedContext = appDelegate.managedObjectContext
         
-        let fetchRequest = NSFetchRequest(entityName: "Iteration")
+        let fetchRequest = NSFetchRequest(entityName: "Submission")
         
         do {
-            let iterations = try managedContext.executeFetchRequest(fetchRequest) as! [Iteration]
-            print("total iteration count: \(iterations.count)")
+            let submissions = try managedContext.executeFetchRequest(fetchRequest) as! [Submission]
+            print("total submission count: \(submissions.count)")
             
-            for iteration in iterations {
-                let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("IterationViewController") as! IterationViewController
-                controller.iteration = iteration
-                iterationViewControllers.append(controller)
+            for submission in submissions {
+                let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("SubmissionViewController") as! SubmissionViewController
+                controller.submission = submission
+                submissionViewControllers.append(controller)
             }
             
-            if let firstViewController = iterationViewControllers.first {
+            if let firstViewController = submissionViewControllers.first {
                 setViewControllers([firstViewController], direction: .Forward, animated: true, completion: nil)
             }
 
@@ -68,7 +62,7 @@ class ExerciseViewController: UIPageViewController, UIPageViewControllerDataSour
     // MARK: Conform to UIPageViewControllerDataSource
     func pageViewController(pageViewController: UIPageViewController,
                             viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
-        guard let viewControllerIndex = iterationViewControllers.indexOf(viewController) else {
+        guard let viewControllerIndex = submissionViewControllers.indexOf(viewController) else {
             return nil
         }
         
@@ -78,41 +72,41 @@ class ExerciseViewController: UIPageViewController, UIPageViewControllerDataSour
             return nil
         }
         
-        guard iterationViewControllers.count > previousIndex else {
+        guard submissionViewControllers.count > previousIndex else {
             return nil
         }
         
-        return iterationViewControllers[previousIndex]
+        return submissionViewControllers[previousIndex]
     }
     
     func pageViewController(pageViewController: UIPageViewController,
                             viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
 
-        guard let viewControllerIndex = iterationViewControllers.indexOf(viewController) else {
+        guard let viewControllerIndex = submissionViewControllers.indexOf(viewController) else {
                 return nil
             }
             
             let nextIndex = viewControllerIndex + 1
-            let iterationViewControllersCount = iterationViewControllers.count
+            let submissionViewControllersCount = submissionViewControllers.count
             
-            guard iterationViewControllersCount != nextIndex else {
+            guard submissionViewControllersCount != nextIndex else {
                 return nil
             }
             
-            guard iterationViewControllersCount > nextIndex else {
+            guard submissionViewControllersCount > nextIndex else {
                 return nil
             }
             
-            return iterationViewControllers[nextIndex]
+            return submissionViewControllers[nextIndex]
     }
     
     func presentationCountForPageViewController(pageViewController: UIPageViewController) -> Int {
-        return iterationViewControllers.count
+        return submissionViewControllers.count
     }
     
     func presentationIndexForPageViewController(pageViewController: UIPageViewController) -> Int {
         guard let firstViewController = viewControllers?.first,
-            firstViewControllerIndex = iterationViewControllers.indexOf(firstViewController) else {
+            firstViewControllerIndex = submissionViewControllers.indexOf(firstViewController) else {
                 return 0
         }
         

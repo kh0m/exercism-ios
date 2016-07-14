@@ -18,26 +18,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject : AnyObject]?) -> Bool {
         // Override point for customization after application launch.
-        
-        let oauthswift = OAuth2Swift(
-            consumerKey:    Github["consumerKey"]!,
-            consumerSecret: Github["consumerSecret"]!,
-            authorizeUrl:   "https://github.com/login/oauth/authorize",
-            accessTokenUrl: "https://github.com/login/oauth/access_token",
-            responseType:   "code"
-        )
-        
-        let state: String = generateStateWithLength(20) as String
-        oauthswift.authorizeWithCallbackURL( NSURL(string: "Exercism-iOS://oauth-callback/github")!, scope: "user,repo", state: state, success: {
-            credential, response, parameters in
-            print("Parameters: \(parameters)")
-            Github["accessToken"] = parameters["access_token"]
-            NetworkHandler.getUser(oauthswift)
-            NetworkHandler.getExercises()
-            
-            }, failure: { error in
-                print(error.localizedDescription)
-        })
 
         networkHandler = NetworkHandler()
         

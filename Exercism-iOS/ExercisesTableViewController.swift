@@ -15,7 +15,6 @@ class ExercisesTableViewController: UITableViewController {
     lazy var languages = [Language]()
     var networkHandler: NetworkHandler?
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -24,9 +23,7 @@ class ExercisesTableViewController: UITableViewController {
         
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        authorize({
-            self.tableView.reloadData()
-        })
+        authorize()
         
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         networkHandler = appDelegate.networkHandler
@@ -87,13 +84,17 @@ class ExercisesTableViewController: UITableViewController {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
         if (segue.identifier == "toExercise") {
-            let vc = segue.destinationViewController as! ExerciseViewController
+            let destinationController = segue.destinationViewController as! ExerciseViewController
             let path = self.tableView.indexPathForCell(sender as! UITableViewCell)!
-            let lang = languages[path.section]
-            let ex = lang.valueForKey("exercises")?.allObjects[path.row]
+            let language = languages[path.section]
+            if let exercise = language.valueForKey("exercises")?.allObjects[path.row] as? Exercise {
+                // tell networkHandler to getIterations for this exercise and put it into core data
+                networkHandler!.getSubmissions(exercise)
+                // then when you load the next viewController, pull from core data
+                destinationController.exercise = exercise
+            }
+            destinationController.networkHandler = networkHandler
             
-            vc.networkHandler = networkHandler
-            vc.exercise = ex as! Exercise
         }
     }
     
@@ -137,7 +138,7 @@ class ExercisesTableViewController: UITableViewController {
 }
 
 extension ExercisesTableViewController {
-    func authorize(completion: () -> Void) {
+    func authorize() {
     
         let oauthswift = OAuth2Swift(
             consumerKey:    Github["consumerKey"]!,
@@ -157,11 +158,10 @@ extension ExercisesTableViewController {
             
             print("Parameters: \(parameters)")
             Github["accessToken"] = parameters["access_token"]
-            NetworkHandler.getUser(oauthswift)
-            NetworkHandler.getExercises({ NetworkHandler.getIterations() })
+            self.networkHandler!.getUser(oauthswift)
+            self.networkHandler!.getExercises()
             
             loginController.dismissWebViewController()
-            completion()
             
         }, failure: { error in
         print(error.localizedDescription)

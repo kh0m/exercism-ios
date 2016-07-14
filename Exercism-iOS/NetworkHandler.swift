@@ -12,16 +12,14 @@ import CoreData
 
 class NetworkHandler: NSObject {
     
-    let queue: NSOperationQueue = NSOperationQueue()
     var mainContext: NSManagedObjectContext?
     
-    class func getUser(oauthswift: OAuth2Swift) {
+    func getUser(oauthswift: OAuth2Swift) {
         if let token = Github["accessToken"] {
             oauthswift.client.request("http://localhost:4567/api_login", method: .GET,
                                       parameters: ["code" : token], headers: [:],
                 success: { data, response in
                     let dataString = NSString(data: data, encoding: NSUTF8StringEncoding)
-                    print(dataString)
                 }, failure: { error in
                     print(error)
                 }
@@ -29,7 +27,7 @@ class NetworkHandler: NSObject {
         }
     }
     
-    class func getExercises(completion: () -> Void) {
+    func getExercises() {
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let managedContext = appDelegate.managedObjectContext
         
@@ -45,14 +43,12 @@ class NetworkHandler: NSObject {
         
         // then fill it
         if let exKey = Exercism["apiKey"] {
-            let url = NSURL(string: "http://exercism.io/api/v1/exercises?key=\(exKey)")
+            let url = NSURL(string: "http://localhost:4567/api/v1/exercises?key=\(exKey)")
             
             
             let task = NSURLSession.sharedSession().dataTaskWithURL(url!) {(data, response, error) in
-                let dataString = NSString(data: data!, encoding: NSUTF8StringEncoding)
-                print(dataString)
                 do {
-                    let json = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions()) as? NSDictionary
+                    let json = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments) as? NSDictionary
                     
                     for (key, value) in json! {
 
@@ -78,9 +74,7 @@ class NetworkHandler: NSObject {
                     } catch let error as NSError {
                         print("Could not save \(error), \(error.userInfo)")
                     }
-                    
-                    completion()
-                    
+                                        
                 } catch {
                     print(error)
                 }
@@ -90,14 +84,10 @@ class NetworkHandler: NSObject {
         }
     }
     
-    func getIterations(exercise: Exercise, completion: Void -> Bool) {
-        print(exercise)
-        let operation = IterationsRequest(ex: exercise)
+    func getSubmissions(exercise: Exercise) {
         
-        
-        
-        // first delete any instances of the Iteration entity
-        let fetchRequest = NSFetchRequest(entityName: "Iteration")
+        // first delete any instances of the Submission entity
+        let fetchRequest = NSFetchRequest(entityName: "Submission")
         let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
         
         do {
@@ -106,49 +96,54 @@ class NetworkHandler: NSObject {
             print("Could not delete \(error), \(error.userInfo)")
         }
         
-        var delegate = self
-        struct SessionProperties {
-            static let identifier : String! = "url_session_get_data"
-        }
-        var configuration = NSURLSessionConfiguration.backgroundSessionConfigurationWithIdentifier(SessionProperties.identifier)
-        let session = NSURLSession(configuration: configuration, delegate: operation, delegateQueue: queue)
-        let url = NSURL(string: "http://localhost:4567/api/v1/submissions/elixir/acronym/iterations?key=aug949")
+        let url = NSURL(string: "http://localhost:4567/api/v1/exercises/\(exercise.key)/submissions")
 
-        let task = session.dataTaskWithURL(url!) { (data, response, error) in
+        let task = NSURLSession.sharedSession().dataTaskWithURL(url!) { (data, response, error) in
             do {
-                let json = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions()) as? NSArray
-                for object in json! {
+                    let json = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions()) as? NSArray
+                    for object in json! {
+                        let entity = NSEntityDescription.entityForName("Submission", inManagedObjectContext: self.mainContext!)
+                        
+                        // insert submission into core data
+                        let submission = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: self.mainContext) as! Submission
+                        // map submission data
+                        submission.exercise = exercise
+                        
+                        
+//                        // get comments and set the submission they belong to
+//                        if let comments = object["comments"] as? NSArray {
+//                            for comment in comments {
+//                                let comment = comment as! NSDictionary
+//                                
+//                                // insert each comment into core data
+//                                let commentEntity = NSEntityDescription.entityForName("Comment", inManagedObjectContext: self.mainContext!)
+//                                let managedComment = NSManagedObject(entity: commentEntity!, insertIntoManagedObjectContext: self.mainContext) as! Comment
+//                                managedComment.submission = submission
+//                                managedComment.text = comment.valueForKey("body") as? String // or should I use html_body
+//                            }
+//                        }
+                    }
                     
-                    let entity = NSEntityDescription.entityForName("Iteration", inManagedObjectContext: self.mainContext!)
-                    let iteration = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: self.mainContext) as! Iteration
+                    do {
+                        try self.mainContext!.save()
+                    } catch let error as NSError {
+                        print("Could not save \(error), \(error.userInfo)")
+                    }
                     
-                    print("OBJEEEEECT: \(object["submission"]!!["solution"])")
-                    let submission = object["submission"]
-                    let solution = submission!!["solution"]
-                    iteration.code = solution as? String
-                    
-                    iteration.exercise = self.exercise
-                    print("exercise iterations: \(self.exercise!.iterations?.allObjects.count)")
+                } catch {
+                    print(error)
                 }
-                
-            } catch {
-                print(error)
-            }
-            
-            do {
-                try self.mainContext!.save()
-            } catch let error as NSError {
-                print("Could not save \(error), \(error.userInfo)")
-            }
+                    
+                    
+                }
+                task.resume()
         }
         
-        queue.addOperation(operation)
-        completion()
     }
     
     
 
-}
+
 
 
 

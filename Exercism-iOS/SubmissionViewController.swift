@@ -1,5 +1,5 @@
 //
-//  IterationViewController.swift
+//  SubmissionViewController.swift
 //  Exercism-iOS
 //
 //  Created by Hom, Kenneth on 4/11/16.
@@ -8,9 +8,9 @@
 
 import UIKit
 
-class IterationViewController: UIViewController {
+class SubmissionViewController: UIViewController {
     
-    var iteration: Iteration?
+    var submission: Submission?
 
     @IBOutlet weak var submissionCodeView: UITextView!
     
@@ -25,10 +25,10 @@ class IterationViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         // code view
-        submissionCodeView.text = iteration!.code
+        submissionCodeView.text = "yolo"
         
-        // make comment views for the iteration
-        for comment in iteration!.comments! {
+        // make comment views for the submission
+        for comment in submission!.comments! {
             if let commentText = comment.valueForKey("text") as? String {
                 commentView.text = commentText
             }

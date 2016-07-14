@@ -1,5 +1,5 @@
 //
-//  Exercise+CoreDataProperties.swift
+//  Submission+CoreDataProperties.swift
 //  Exercism-iOS
 //
 //  Created by Hom, Kenneth on 7/8/16.
@@ -12,12 +12,11 @@
 import Foundation
 import CoreData
 
-extension Exercise {
+extension Submission {
 
-    @NSManaged var isActive: NSNumber?
-    @NSManaged var name: String?
-    @NSManaged var key: String?
-    @NSManaged var submissions: NSSet?
-    @NSManaged var language: Language?
+    @NSManaged var version: NSNumber?
+    @NSManaged var comments: NSSet?
+    @NSManaged var exercise: Exercise?
+    @NSManaged var solutionFiles: NSSet?
 
 }

@@ -22,8 +22,6 @@ class LoginViewController: OAuthWebViewController {
         self.webView.delegate = self
         self.view.addSubview(self.webView)
         loadAddressURL()
-        
-        print("LOGIN VIEWCONTROLLER")
     }
 
     override func handle(url: NSURL) {

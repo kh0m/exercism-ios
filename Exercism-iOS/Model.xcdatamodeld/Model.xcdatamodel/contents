@@ -1,29 +1,36 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10171" systemVersion="15E65" minimumToolsVersion="Xcode 7.0">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10174" systemVersion="15F34" minimumToolsVersion="Xcode 7.0">
     <entity name="Comment" representedClassName=".Comment" syncable="YES">
         <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="iteration" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Iteration" inverseName="comments" inverseEntity="Iteration" syncable="YES"/>
+        <relationship name="submission" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Submission" inverseName="comments" inverseEntity="Submission" syncable="YES"/>
     </entity>
     <entity name="Exercise" representedClassName=".Exercise" syncable="YES">
         <attribute name="isActive" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="key" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="iterations" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Iteration" inverseName="exercise" inverseEntity="Iteration" syncable="YES"/>
         <relationship name="language" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Language" inverseName="exercises" inverseEntity="Language" syncable="YES"/>
-    </entity>
-    <entity name="Iteration" representedClassName=".Iteration" syncable="YES">
-        <attribute name="code" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="version" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <relationship name="comments" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Comment" inverseName="iteration" inverseEntity="Comment" syncable="YES"/>
-        <relationship name="exercise" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Exercise" inverseName="iterations" inverseEntity="Exercise" syncable="YES"/>
+        <relationship name="submissions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Submission" inverseName="exercise" inverseEntity="Submission" syncable="YES"/>
     </entity>
     <entity name="Language" representedClassName=".Language" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="exercises" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Exercise" inverseName="language" inverseEntity="Exercise" syncable="YES"/>
     </entity>
+    <entity name="SolutionFile" representedClassName=".SolutionFile" syncable="YES">
+        <attribute name="code" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="fileName" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="submission" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Submission" inverseName="solutionFiles" inverseEntity="Submission" syncable="YES"/>
+    </entity>
+    <entity name="Submission" representedClassName=".Submission" syncable="YES">
+        <attribute name="version" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="comments" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Comment" inverseName="submission" inverseEntity="Comment" syncable="YES"/>
+        <relationship name="exercise" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Exercise" inverseName="submissions" inverseEntity="Exercise" syncable="YES"/>
+        <relationship name="solutionFiles" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SolutionFile" inverseName="submission" inverseEntity="SolutionFile" syncable="YES"/>
+    </entity>
     <elements>
-        <element name="Comment" positionX="-2558" positionY="-3405" width="128" height="73"/>
-        <element name="Exercise" positionX="-3006" positionY="-3555" width="128" height="103"/>
-        <element name="Iteration" positionX="-2738" positionY="-3555" width="128" height="103"/>
+        <element name="Comment" positionX="-2558" positionY="-3405" width="128" height="75"/>
+        <element name="Exercise" positionX="-3006" positionY="-3555" width="128" height="120"/>
         <element name="Language" positionX="-3069" positionY="-3717" width="128" height="75"/>
+        <element name="Submission" positionX="-2835" positionY="-3537" width="128" height="103"/>
+        <element name="SolutionFile" positionX="-2871" positionY="-3348" width="128" height="88"/>
     </elements>
 </model>

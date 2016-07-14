@@ -1,8 +1,8 @@
 //
-//  Iteration.swift
+//  Submission.swift
 //  Exercism-iOS
 //
-//  Created by Hom, Kenneth on 4/27/16.
+//  Created by Hom, Kenneth on 7/8/16.
 //  Copyright © 2016 Hom, Kenneth. All rights reserved.
 //
 
@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 
 
-class Iteration: NSManagedObject {
+class Submission: NSManagedObject {
 
 // Insert code here to add functionality to your managed object subclass
 
