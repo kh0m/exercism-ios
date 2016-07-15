@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="j1w-ZV-LU9">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="dkV-8O-5m3">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -23,7 +23,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="m4w-08-H1a" kind="show" identifier="toExercise" id="NQa-nK-qcj"/>
+                                    <segue destination="m4w-08-H1a" kind="showDetail" identifier="toExercise" action="showViewController:sender:" id="NQa-nK-qcj"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -36,7 +36,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Pq-Se-8nH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="94" y="-816"/>
+            <point key="canvasLocation" x="88" y="-344"/>
         </scene>
         <!--Exercise View Controller-->
         <scene sceneID="Pi3-1d-amW">
@@ -194,7 +194,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="utu-EL-KCB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-718" y="-42"/>
+            <point key="canvasLocation" x="-816" y="20"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="6Ta-2j-cbr">
@@ -206,13 +206,27 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="VvT-nd-gTN" kind="relationship" relationship="viewControllers" id="o8T-Ud-3bk"/>
+                        <segue destination="VvT-nd-gTN" kind="relationship" relationship="viewControllers" id="wv6-6Z-KyY"/>
                         <segue destination="mje-j4-Nze" kind="relationship" relationship="viewControllers" id="EBf-nx-ykD"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D43-rT-mor" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1724" y="-429"/>
+            <point key="canvasLocation" x="-1712" y="-433"/>
+        </scene>
+        <!--Item-->
+        <scene sceneID="bZC-HU-UPB">
+            <objects>
+                <splitViewController id="dkV-8O-5m3" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="73V-13-UZu"/>
+                    <connections>
+                        <segue destination="m4w-08-H1a" kind="relationship" relationship="detailViewController" id="ed5-3c-kwA"/>
+                        <segue destination="j1w-ZV-LU9" kind="relationship" relationship="masterViewController" id="7Iq-BC-H26"/>
+                    </connections>
+                </splitViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aWR-mx-tcQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-816" y="-1640"/>
         </scene>
         <!--My Submissions-->
         <scene sceneID="dXH-3w-Ylc">
@@ -237,12 +251,15 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mMX-b2-Ho8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-718" y="-816"/>
+            <point key="canvasLocation" x="-816" y="-676"/>
         </scene>
     </scenes>
     <resources>
         <image name="first" width="30" height="30"/>
         <image name="second" width="30" height="30"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="NQa-nK-qcj"/>
+    </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.80000000000000004" green="0.15294117647058825" blue="0.25882352941176473" alpha="1" colorSpace="calibratedRGB"/>
 </document>

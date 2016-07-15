@@ -24,7 +24,7 @@ class ExerciseViewController: UIPageViewController, UIPageViewControllerDataSour
         
         dataSource = self
         
-        self.navigationItem.title = exercise!.name
+        // self.navigationItem.title = exercise!.name
         self.view.backgroundColor = UIColor.grayColor()
         
     }
