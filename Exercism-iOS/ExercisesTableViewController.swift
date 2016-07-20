@@ -10,30 +10,37 @@ import UIKit
 import OAuthSwift
 import CoreData
 
+protocol ExerciseSelectionDelegate: class {
+    func exerciseSelected(newExercise: Exercise)
+}
+
 class ExercisesTableViewController: UITableViewController {
     
     lazy var languages = [Language]()
     var networkHandler: NetworkHandler?
     
+    weak var delegate: ExerciseSelectionDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
+        self.delegate = self.splitViewController?.viewControllers.last?.childViewControllers.first as! ExerciseViewController
         
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         authorize()
         
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         networkHandler = appDelegate.networkHandler
         
         let managedContext = appDelegate.managedObjectContext
-
+        
         let fetchRequest = NSFetchRequest(entityName: "Language")
         
         do {
             languages = try managedContext.executeFetchRequest(fetchRequest) as! [Language]
+            
+            if let exerciseViewController = self.splitViewController?.viewControllers.last as? ExerciseViewController {
+                exerciseViewController.exercise = languages.first?.exercises?.allObjects.first as? Exercise
+            }
         } catch let error as NSError {
             print("Could not fetch \(error), \(error.userInfo)")
         }
@@ -45,7 +52,7 @@ class ExercisesTableViewController: UITableViewController {
         // #warning Incomplete implementation, return the number of sections
         return languages.count
     }
-
+    
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return languages[section].name
     }
@@ -67,9 +74,14 @@ class ExercisesTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         print("You selected cell #\(indexPath.row)!")
+        let language = languages[indexPath.section]
+        if let selectedExercise = language.valueForKey("exercises")?.allObjects[indexPath.row] as? Exercise {
+            networkHandler!.getSubmissions(selectedExercise)
+            self.delegate?.exerciseSelected(selectedExercise)
+        }
     }
     
-
+    
     
     
     override func didReceiveMemoryWarning() {
@@ -79,24 +91,26 @@ class ExercisesTableViewController: UITableViewController {
     
     // MARK: - Navigation
     
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-        if (segue.identifier == "toExercise") {
-            let destinationController = segue.destinationViewController as! ExerciseViewController
-            let path = self.tableView.indexPathForCell(sender as! UITableViewCell)!
-            let language = languages[path.section]
-            if let exercise = language.valueForKey("exercises")?.allObjects[path.row] as? Exercise {
-                // tell networkHandler to getIterations for this exercise and put it into core data
-                networkHandler!.getSubmissions(exercise)
-                // then when you load the next viewController, pull from core data
-                destinationController.exercise = exercise
-            }
-            destinationController.networkHandler = networkHandler
-            
-        }
-    }
+//        // In a storyboard-based application, you will often want to do a little preparation before navigation
+//        override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+//            // Get the new view controller using segue.destinationViewController.
+//            // Pass the selected object to the new view controller.
+//            if (segue.identifier == "toExercise") {
+//                let destinationController = segue.destinationViewController as! ExerciseViewController
+//                let path = self.tableView.indexPathForCell(sender as! UITableViewCell)!
+//                let language = languages[path.section]
+//                if let exercise = language.valueForKey("exercises")?.allObjects[path.row] as? Exercise {
+//                    // tell networkHandler to get submissions for this exercise and put it into core data
+//                    networkHandler!.getSubmissions(exercise)
+//                    // then when you load the next viewController, pull from core data
+//                    destinationController.exercise = exercise
+//                }
+//                destinationController.networkHandler = networkHandler
+//    
+//            }
+//        }
+    
+    
     
     // MARK: - Editing
     
@@ -139,7 +153,7 @@ class ExercisesTableViewController: UITableViewController {
 
 extension ExercisesTableViewController {
     func authorize() {
-    
+        
         let oauthswift = OAuth2Swift(
             consumerKey:    Github["consumerKey"]!,
             consumerSecret: Github["consumerSecret"]!,
@@ -163,13 +177,13 @@ extension ExercisesTableViewController {
             
             loginController.dismissWebViewController()
             
-        }, failure: { error in
-        print(error.localizedDescription)
+            }, failure: { error in
+                print(error.localizedDescription)
         })
         
         
     }
-
+    
 }
 
 

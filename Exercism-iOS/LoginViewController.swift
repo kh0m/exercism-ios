@@ -13,7 +13,7 @@ class LoginViewController: OAuthWebViewController {
     
     var targetURL : NSURL = NSURL()
     let webView : UIWebView = UIWebView()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -23,7 +23,7 @@ class LoginViewController: OAuthWebViewController {
         self.view.addSubview(self.webView)
         loadAddressURL()
     }
-
+    
     override func handle(url: NSURL) {
         targetURL = url
         super.handle(url)
@@ -36,7 +36,7 @@ class LoginViewController: OAuthWebViewController {
         self.webView.loadRequest(req)
     }
 }
-    
+
 // MARK: delegate
 extension LoginViewController: UIWebViewDelegate {
     func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {

@@ -18,8 +18,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject : AnyObject]?) -> Bool {
         // Override point for customization after application launch.
-
+        
         networkHandler = NetworkHandler()
+        
+        // set the exercise variable for initial detail controller
+        //        let splitViewController = self.window!.rootViewController as! UISplitViewController
+        //        let tabBarViewController = splitViewController.viewControllers.first as! UITabBarController
+        //        let leftViewController = tabBarViewController.viewControllers?.first as! UINavigationController
+        //
+        //        let masterViewController = leftViewController.viewControllers.first as! ExercisesTableViewController
+        //        let detailViewController = splitViewController.viewControllers.last as! ExerciseViewController
+        //
+        //        let firstExercise = masterViewController.languages.first?.exercises?.allObjects.first
+        //        detailViewController.exercise = firstExercise as? Exercise
         
         return true
     }
